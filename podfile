@@ -1,0 +1,14 @@
+target 'StockSafe' do
+    platform :ios, ‘10.0’
+    use_frameworks!	
+    pod 'Firebase'
+    pod 'Firebase/Auth'
+    pod 'FirebaseUI/Auth'
+    pod 'FirebaseUI/Phone'
+    pod 'Firebase/Storage'
+    pod 'FirebaseFirestoreSwift', '~> 7.0-beta'
+    pod 'Charts'	
+    pod 'UIMultiPicker', '~> 0.6'
+    pod 'lottie-ios'
+    pod 'CollectionViewCenteredFlowLayout'
+end
