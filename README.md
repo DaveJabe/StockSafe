@@ -4,7 +4,7 @@
 ## Development Guidelines
 * The Email/Password combination for logging into StockSafe on test devices/simulators is: dj96202013@gmail.com/Dj1999dj.
 * Currently, this project lacks commented code almost entirely. Now that we're working as a team, we aim to change this by commenting as throughly and parsimoniously as possible from here on out.
-* Quality assurance is to be handled by the developer who has not committed the code (i.e. If David makes commits changes to the code, Jose reviews them for quality assurance).
+* Quality assurance is to be handled by the developer who has not committed the code (i.e. If David commits changes to the code, Jose reviews them for quality assurance).
 * Quality assurance must be completed for ALL kanbans.
 * If we fail to find aggreement on some aspect of the project's code (readability, efficiency etc.), we'll consult StackOverflow, Apple Documentation, Angela Yu's Udemy videos, Harsh and/or Faiz for guidance.
 * The timeline (found below this section) will be updated weekly with 2-4 broadly defined tasks. Each of the four tasks will reflect a group of kanbans.
