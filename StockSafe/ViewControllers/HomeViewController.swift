@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Stocked.
 //
 //  Created by David Jabech on 3/11/21.
@@ -14,7 +14,7 @@ let vckey = "vckey"
 let loggedIn = "loggedIn"
 var userIDkey = UserDefaults.standard.value(forKey: "UserID") as? String ?? ""
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     var db = Firestore.firestore()
     
@@ -105,7 +105,7 @@ class ViewController: UIViewController {
     }
     
     @objc private func reloadViewController() {
-        print("reloading ViewController")
+        print("reloading HomeViewController")
         viewDidLoad()
     }
     

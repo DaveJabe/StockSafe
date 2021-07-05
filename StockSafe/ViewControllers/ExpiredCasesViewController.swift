@@ -13,7 +13,7 @@ import Lottie
 
 class ExpiredCasesViewController: UIViewController {
     
-    private let vc1 = ViewController1()
+    private let vc1 = NewCasesViewController()
     private let products = ["Filet", "Spicy", "Nugget", "Strip", "Grilled Filet", "Grilled Nugget", "Breakfast Filet"]
     private let loadingView = LoadingView.init()
     private let animationView = AnimationView()
@@ -85,7 +85,7 @@ class ExpiredCasesViewController: UIViewController {
     @objc private func reloadExpiredCasesTable() {
         expiredCasesTable.addSubview(loadingView)
         expiredCasesTable.bringSubviewToFront(loadingView)
-        SearchView().setTableColor(product: selectedProduct, table: expiredCasesTable)
+        StockCasesViewController().setTableColor(product: selectedProduct, table: expiredCasesTable)
         loadingView.loadingAnimation.backgroundColor = expiredCasesTable.backgroundColor?.withAlphaComponent(1)
         loadingView.loadingAnimation.play()
         animationView.play()

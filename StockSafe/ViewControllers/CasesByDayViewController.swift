@@ -13,7 +13,7 @@ import Charts
 class CasesByDayViewController: UIViewController, ChartViewDelegate {
     
     var db: Firestore!
-    let sv = SearchView()
+    let sv = StockCasesViewController()
     let barChart = BarChartView()
     var entries = [BarChartDataEntry]()
     

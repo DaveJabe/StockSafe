@@ -18,7 +18,7 @@ class newCaseCell: UITableViewCell {
     
 }
 
-class ViewController1: UIViewController {
+class NewCasesViewController: UIViewController {
     
     private var db: Firestore!
     private var tableCases = [Case]()
@@ -165,7 +165,7 @@ class ViewController1: UIViewController {
     
     public func reloadTable() {
         header.isHidden = true
-        SearchView().setTableColor(product: selectedProduct, table: newCasesTable)
+        StockCasesViewController().setTableColor(product: selectedProduct, table: newCasesTable)
         loadingView.backgroundColor = newCasesTable.backgroundColor?.withAlphaComponent(1)
         newCasesTable.addSubview(loadingView)
         newCasesTable.bringSubviewToFront(loadingView)
@@ -518,7 +518,7 @@ class ViewController1: UIViewController {
     }
 }
 
-extension ViewController1: UIPickerViewDataSource, UIPickerViewDelegate {
+extension NewCasesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         switch pickerView.tag {
@@ -576,7 +576,7 @@ extension ViewController1: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
-extension ViewController1: UITableViewDelegate, UITableViewDataSource {
+extension NewCasesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableCases.count
     }
@@ -609,13 +609,13 @@ extension ViewController1: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ViewController1: UITextFieldDelegate {
+extension NewCasesViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
 }
 
-extension ViewController1: UIScrollViewDelegate {
+extension NewCasesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         hideProductView()
     }

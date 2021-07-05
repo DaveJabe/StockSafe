@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		211CD56026916A7A001235CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 211CD55F26916A7A001235CC /* GoogleService-Info.plist */; };
-		2125997D2693210300FE747A /* StockedProViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125996E2693210300FE747A /* StockedProViewController.swift */; };
-		2125997E2693210300FE747A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125996F2693210300FE747A /* ViewController.swift */; };
+		2125997D2693210300FE747A /* StockCasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125996E2693210300FE747A /* StockCasesViewController.swift */; };
+		2125997E2693210300FE747A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125996F2693210300FE747A /* HomeViewController.swift */; };
 		2125997F2693210300FE747A /* CasesByDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599702693210300FE747A /* CasesByDayViewController.swift */; };
 		212599802693210300FE747A /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599712693210300FE747A /* AccountInfoViewController.swift */; };
 		212599812693210300FE747A /* SetLimitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599722693210300FE747A /* SetLimitsViewController.swift */; };
-		212599822693210300FE747A /* ViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599732693210300FE747A /* ViewController1.swift */; };
+		212599822693210300FE747A /* NewCasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599732693210300FE747A /* NewCasesViewController.swift */; };
 		212599832693210300FE747A /* CasesByWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599742693210300FE747A /* CasesByWeekViewController.swift */; };
 		212599842693210300FE747A /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599752693210300FE747A /* TutorialViewController.swift */; };
 		212599852693210300FE747A /* OverTheWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599762693210300FE747A /* OverTheWeekViewController.swift */; };
@@ -59,12 +59,12 @@
 /* Begin PBXFileReference section */
 		211CD55F26916A7A001235CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		211CD56126916C58001235CC /* absl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = absl.framework; path = "/Users/davidjabech/Library/Developer/Xcode/DerivedData/StockSafe-ccwfnnxymhmdveelsuopmdlflzmm/Build/Products/Debug-iphoneos/abseil/absl.framework"; sourceTree = "<absolute>"; };
-		2125996E2693210300FE747A /* StockedProViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockedProViewController.swift; sourceTree = "<group>"; };
-		2125996F2693210300FE747A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2125996E2693210300FE747A /* StockCasesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockCasesViewController.swift; sourceTree = "<group>"; };
+		2125996F2693210300FE747A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		212599702693210300FE747A /* CasesByDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CasesByDayViewController.swift; sourceTree = "<group>"; };
 		212599712693210300FE747A /* AccountInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
 		212599722693210300FE747A /* SetLimitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetLimitsViewController.swift; sourceTree = "<group>"; };
-		212599732693210300FE747A /* ViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController1.swift; sourceTree = "<group>"; };
+		212599732693210300FE747A /* NewCasesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCasesViewController.swift; sourceTree = "<group>"; };
 		212599742693210300FE747A /* CasesByWeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CasesByWeekViewController.swift; sourceTree = "<group>"; };
 		212599752693210300FE747A /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		212599762693210300FE747A /* OverTheWeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverTheWeekViewController.swift; sourceTree = "<group>"; };
@@ -126,21 +126,21 @@
 		2125996D2693210300FE747A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2125996E2693210300FE747A /* StockedProViewController.swift */,
-				2125996F2693210300FE747A /* ViewController.swift */,
-				212599702693210300FE747A /* CasesByDayViewController.swift */,
-				212599712693210300FE747A /* AccountInfoViewController.swift */,
-				212599722693210300FE747A /* SetLimitsViewController.swift */,
-				212599732693210300FE747A /* ViewController1.swift */,
-				212599742693210300FE747A /* CasesByWeekViewController.swift */,
-				212599752693210300FE747A /* TutorialViewController.swift */,
-				212599762693210300FE747A /* OverTheWeekViewController.swift */,
-				212599772693210300FE747A /* DeleteCasesViewController.swift */,
-				212599782693210300FE747A /* ExpiredCasesViewController.swift */,
 				212599792693210300FE747A /* LoginViewController.swift */,
 				2125997A2693210300FE747A /* CreateAccountViewController.swift */,
+				2125996F2693210300FE747A /* HomeViewController.swift */,
+				212599732693210300FE747A /* NewCasesViewController.swift */,
+				2125996E2693210300FE747A /* StockCasesViewController.swift */,
+				212599782693210300FE747A /* ExpiredCasesViewController.swift */,
+				212599712693210300FE747A /* AccountInfoViewController.swift */,
 				2125997B2693210300FE747A /* SettingsViewController.swift */,
+				212599722693210300FE747A /* SetLimitsViewController.swift */,
+				212599752693210300FE747A /* TutorialViewController.swift */,
+				212599772693210300FE747A /* DeleteCasesViewController.swift */,
 				2125997C2693210300FE747A /* SubscriptionViewController.swift */,
+				212599702693210300FE747A /* CasesByDayViewController.swift */,
+				212599762693210300FE747A /* OverTheWeekViewController.swift */,
+				212599742693210300FE747A /* CasesByWeekViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -401,12 +401,12 @@
 			files = (
 				2125998B2693210300FE747A /* SubscriptionViewController.swift in Sources */,
 				212599AD269321D600FE747A /* LimitCell.swift in Sources */,
-				212599822693210300FE747A /* ViewController1.swift in Sources */,
+				212599822693210300FE747A /* NewCasesViewController.swift in Sources */,
 				212599BC269321FA00FE747A /* ProductLocationCollectionHeader.swift in Sources */,
 				212599BA269321FA00FE747A /* StockingHistoryView.swift in Sources */,
 				2125999D269321AD00FE747A /* ProductDataObject.swift in Sources */,
 				212599832693210300FE747A /* CasesByWeekViewController.swift in Sources */,
-				2125997E2693210300FE747A /* ViewController.swift in Sources */,
+				2125997E2693210300FE747A /* HomeViewController.swift in Sources */,
 				212599AE269321D600FE747A /* FieldCell.swift in Sources */,
 				212599882693210300FE747A /* LoginViewController.swift in Sources */,
 				212599892693210300FE747A /* CreateAccountViewController.swift in Sources */,
@@ -418,7 +418,7 @@
 				212599A8269321D600FE747A /* TitleCell.swift in Sources */,
 				212599BE269321FA00FE747A /* LoadingView.swift in Sources */,
 				212599BB269321FA00FE747A /* ProductCollectionView.swift in Sources */,
-				2125997D2693210300FE747A /* StockedProViewController.swift in Sources */,
+				2125997D2693210300FE747A /* StockCasesViewController.swift in Sources */,
 				212599AC269321D600FE747A /* ProductLocationCollectionCell.swift in Sources */,
 				212599812693210300FE747A /* SetLimitsViewController.swift in Sources */,
 				2125997F2693210300FE747A /* CasesByDayViewController.swift in Sources */,

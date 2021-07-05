@@ -56,7 +56,7 @@ class ProductTableCell: UITableViewCell {
     }
 }
 
-class SearchView: UIViewController {
+class StockCasesViewController: UIViewController {
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
@@ -780,7 +780,7 @@ class SearchView: UIViewController {
     }
 }
     
-extension SearchView: UITableViewDataSource, UITableViewDelegate {
+extension StockCasesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tuckAwaySelectionViews()
@@ -830,13 +830,13 @@ extension SearchView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension SearchView:  UITextFieldDelegate {
+extension StockCasesViewController:  UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
 }
 
-extension SearchView: UIScrollViewDelegate {
+extension StockCasesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         tuckAwaySelectionViews()
     }
