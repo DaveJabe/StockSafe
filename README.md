@@ -2,7 +2,7 @@
 >The cutting-edge, effortless solution for tracking cases of perishable products. StockSafe's unique approach to product management makes cost-efficacy, guest-safety and employee productivity remarkably simple.
 
 ## Development Guidelines
-* The Email/Password combination for running StockSafe on test devices/simulators is: dj96202013@gmail.com/Dj1999dj.
+* The Email/Password combination for logging into StockSafe on test devices/simulators is: dj96202013@gmail.com/Dj1999dj.
 * Currently, this project lacks commented code almost entirely. Now that we're working as a team, we aim to change this by commenting as throughly and parsimoniously as possible from here on out.
 * Quality assurance is to be handled by the developer who has not committed the code (i.e. If David makes commits changes to the code, Jose reviews them for quality assurance).
 * Quality assurance must be completed for ALL kanbans.
