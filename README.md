@@ -3,7 +3,7 @@
 
 ## Development Guidelines
 * The Email/Password combination for logging into StockSafe on test devices/simulators is: dj96202013@gmail.com/Dj1999dj.
-* The fonts used throughout this project include "Avenir" and "Avenir Heavy."
+* The fonts used throughout this project include "Avenir Book" and "Avenir Heavy."
 * Currently, this project lacks commented code almost entirely- now that we're working as a team, we aim to change this by commenting as throughly and parsimoniously as possible from here on out.
 * Quality assurance is to be handled by the developer who has not committed the code (i.e. If David commits changes to the code, Jose reviews them for quality assurance).
 * Quality assurance must be completed for ALL kanbans.
