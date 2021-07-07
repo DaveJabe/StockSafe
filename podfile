@@ -6,9 +6,7 @@ target 'StockSafe' do
     pod 'FirebaseUI/Auth'
     pod 'FirebaseUI/Phone'
     pod 'Firebase/Storage'
-    pod 'FirebaseFirestoreSwift', '~> 7.0-beta'
-    pod 'Charts'	
-    pod 'UIMultiPicker', '~> 0.6'
+    pod 'FirebaseFirestoreSwift', '~> 7.0-beta'	
     pod 'lottie-ios'
     pod 'CollectionViewCenteredFlowLayout'
 end
