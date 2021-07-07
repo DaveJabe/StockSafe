@@ -218,9 +218,6 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
   - CollectionViewCenteredFlowLayout (1.0.1)
   - Firebase (7.11.0):
     - Firebase/Core (= 7.11.0)
@@ -365,10 +362,8 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (1.2.12)
-  - UIMultiPicker (0.6.2)
 
 DEPENDENCIES:
-  - Charts
   - CollectionViewCenteredFlowLayout
   - Firebase
   - Firebase/Auth
@@ -377,13 +372,11 @@ DEPENDENCIES:
   - FirebaseUI/Auth
   - FirebaseUI/Phone
   - lottie-ios
-  - UIMultiPicker (~> 0.6)
 
 SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
-    - Charts
     - CollectionViewCenteredFlowLayout
     - Firebase
     - FirebaseAnalytics
@@ -405,12 +398,10 @@ SPEC REPOS:
     - lottie-ios
     - nanopb
     - PromisesObjC
-    - UIMultiPicker
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CollectionViewCenteredFlowLayout: 339b935be4d8578c59e448c8906117a07c657d85
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseAnalytics: cd3bd84d722a24a8923918af8af8e5236f615d77
@@ -432,8 +423,7 @@ SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  UIMultiPicker: 29bf824c5251822ca4040b933f6204e617e6ba3f
 
-PODFILE CHECKSUM: cd8de3afc5b049b04f49be807ad1593719225a49
+PODFILE CHECKSUM: 6b8d4fb3f97d39ec96566eb1f2f9f60414de3707
 
 COCOAPODS: 1.10.1
