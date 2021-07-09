@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 class CreateAccountViewController: UIViewController {
     
@@ -134,7 +135,7 @@ class CreateAccountViewController: UIViewController {
                                               "bfiletBT" : 0]
         
         db.collection("userInfo").addDocument(data: ["autoArchive" : false,
-                                                     "dateJoined" : Firebase.Timestamp.init(),
+                                                     "dateJoined" : Timestamp.init(),
                                                      "limitsOn" : false,
                                                      "limits" : limitsDictionary,
                                                      "userEmail" : Auth.auth().currentUser!.email! as String,

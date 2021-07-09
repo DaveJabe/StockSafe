@@ -20,15 +20,15 @@ class HomeViewController: UIViewController {
     
     private let animationView = AnimationView(animation: Animation.named("orangeAlert"))
            
-    @IBOutlet var expiredCasesButtonView: UIView!
+    @IBOutlet var expiredCasesButton: UIButton!
     
     @objc private func setUpAnimation() {
         animationView.loopMode = .loop
         animationView.contentMode = .scaleToFill
         animationView.isHidden = true
-        expiredCasesButtonView.addSubview(animationView)
-        expiredCasesButtonView.bringSubviewToFront(animationView)
-        animationView.frame = CGRect(x: expiredCasesButtonView.frame.size.width-70, y: -30, width: 100, height: 100)
+        expiredCasesButton.addSubview(animationView)
+        expiredCasesButton.bringSubviewToFront(animationView)
+        animationView.frame = CGRect(x: expiredCasesButton.frame.size.width-70, y: -30, width: 100, height: 100)
 
         let offsetDate = Calendar.current.date(byAdding: .day, value: -4, to: Date())
         let expiredCasesRef = db.collection("cases")

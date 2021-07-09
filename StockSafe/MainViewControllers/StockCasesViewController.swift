@@ -183,7 +183,7 @@ class StockCasesViewController: UIViewController {
                 if selectedLocation != "Breading Table" && selectedLocation != "Thawing Cabinet" {
                     document.updateData([
                         "location" : "Thawing Cabinet",
-                        "shelfLife" : Firebase.Timestamp.init()
+                        "shelfLife" : Timestamp.init()
                     ])
                 }
                 else {
@@ -195,7 +195,7 @@ class StockCasesViewController: UIViewController {
                 if selectedLocation != "Freezer" && selectedLocation != "Breading Table" {
                     document.updateData([
                         "location" : "Breading Table",
-                        "breadingStamp" : Firebase.Timestamp.init()
+                        "breadingStamp" : Timestamp.init()
                     ])
                 }
                 else {
