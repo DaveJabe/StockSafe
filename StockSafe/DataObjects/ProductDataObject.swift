@@ -15,4 +15,5 @@ struct Product: Codable, Identifiable {
     let shelfLifeBegins: String?
     let maxShelfLife: Int
     let color: UIColor.Hex
+    let userID: String
 }

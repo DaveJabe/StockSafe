@@ -20,6 +20,8 @@ class newCaseCell: UITableViewCell {
 
 class NewCasesViewController: UIViewController {
     
+    typealias design = UIViewDesigner
+    
     private var db: Firestore!
     private var tableCases = [Case]()
     
@@ -54,7 +56,7 @@ class NewCasesViewController: UIViewController {
     
     @IBOutlet var enterNewCasesView: UIView!
     @IBOutlet var helpButton: UIButton!
-    private let header = UIView()
+    private var header = UIView()
     @IBOutlet var newCasesTable: UITableView!
     @IBOutlet var multipleCasesSwitch: UISwitch!
     @IBAction func multipleCasesToggle(_ sender: UISwitch) {
@@ -314,22 +316,6 @@ class NewCasesViewController: UIViewController {
         }
     }
     
-    private func buildHeader() {
-        let selectCasesLabel = UILabel()
-        selectCasesLabel.translatesAutoresizingMaskIntoConstraints = false
-        header.backgroundColor = .white
-        header.addSubview(selectCasesLabel)
-        selectCasesLabel.text = "Cases In Freezer"
-        selectCasesLabel.font =  UIFont(name: "Avenir Heavy", size: 20)
-        selectCasesLabel.textColor = .darkGray
-        NSLayoutConstraint.activate([
-            selectCasesLabel.leadingAnchor.constraint(equalTo: header.layoutMarginsGuide.leadingAnchor),
-            selectCasesLabel.widthAnchor.constraint(equalToConstant: 250),
-            selectCasesLabel.heightAnchor.constraint(equalToConstant: 50),
-            selectCasesLabel.centerYAnchor.constraint(equalTo: header.centerYAnchor)
-        ])
-    }
-    
     private func setUpSelectionView() {
         let shadowPath = CGPath(ellipseIn: CGRect(x: 0,
                                                   y: productSelect.layer.bounds.height,
@@ -485,7 +471,7 @@ class NewCasesViewController: UIViewController {
         newCasesTable.delegate = self
         newCasesTable.dataSource = self
         
-        buildHeader()
+        header = design().buildTableViewHeader(title: "Cases In Freezer")
         
         setUpSelectionView()
         

@@ -45,6 +45,14 @@
 		212599BE269321FA00FE747A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599B7269321FA00FE747A /* LoadingView.swift */; };
 		212599BF269321FA00FE747A /* DestinationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212599B8269321FA00FE747A /* DestinationCollectionView.swift */; };
 		218A428F2691A5BD007CE09B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21D29792269163BD004D7031 /* Main.storyboard */; };
+		21A275B72695CD31008FDC3E /* ProductDashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275B62695CD31008FDC3E /* ProductDashboardCell.swift */; };
+		21A275B92695D286008FDC3E /* ProductDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275B82695D286008FDC3E /* ProductDashboardViewController.swift */; };
+		21A275BE2695ED9C008FDC3E /* ProductInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275BD2695ED9C008FDC3E /* ProductInfoViewController.swift */; };
+		21A275C02695F187008FDC3E /* ProductInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275BF2695F187008FDC3E /* ProductInfoCell.swift */; };
+		21A275C626963258008FDC3E /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275C526963258008FDC3E /* AddProductViewController.swift */; };
+		21A275C82696344B008FDC3E /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275C72696344B008FDC3E /* ColorSelectViewController.swift */; };
+		21A275CA26982266008FDC3E /* UIViewDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275C926982264008FDC3E /* UIViewDesigner.swift */; };
+		21A275CC269846CF008FDC3E /* CollectionViewLeadingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A275CB269846CE008FDC3E /* CollectionViewLeadingFlowLayout.swift */; };
 		21C3875B2691659C00D17F45 /* HexColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C387552691659B00D17F45 /* HexColors.swift */; };
 		21D2978D269163BD004D7031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2978C269163BD004D7031 /* AppDelegate.swift */; };
 		21D2978F269163BD004D7031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2978E269163BD004D7031 /* SceneDelegate.swift */; };
@@ -92,6 +100,14 @@
 		212599B6269321FA00FE747A /* NotConnectedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotConnectedView.swift; sourceTree = "<group>"; };
 		212599B7269321FA00FE747A /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		212599B8269321FA00FE747A /* DestinationCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationCollectionView.swift; sourceTree = "<group>"; };
+		21A275B62695CD31008FDC3E /* ProductDashboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDashboardCell.swift; sourceTree = "<group>"; };
+		21A275B82695D286008FDC3E /* ProductDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDashboardViewController.swift; sourceTree = "<group>"; };
+		21A275BD2695ED9C008FDC3E /* ProductInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoViewController.swift; sourceTree = "<group>"; };
+		21A275BF2695F187008FDC3E /* ProductInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoCell.swift; sourceTree = "<group>"; };
+		21A275C526963258008FDC3E /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		21A275C72696344B008FDC3E /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
+		21A275C926982264008FDC3E /* UIViewDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewDesigner.swift; sourceTree = "<group>"; };
+		21A275CB269846CE008FDC3E /* CollectionViewLeadingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLeadingFlowLayout.swift; sourceTree = "<group>"; };
 		21C387552691659B00D17F45 /* HexColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColors.swift; sourceTree = "<group>"; };
 		21D29789269163BD004D7031 /* StockSafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockSafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D2978C269163BD004D7031 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,7 +133,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2125996D2693210300FE747A /* ViewControllers */ = {
+		2125996D2693210300FE747A /* MainViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				212599792693210300FE747A /* LoginViewController.swift */,
@@ -126,14 +142,8 @@
 				212599732693210300FE747A /* NewCasesViewController.swift */,
 				2125996E2693210300FE747A /* StockCasesViewController.swift */,
 				212599782693210300FE747A /* ExpiredCasesViewController.swift */,
-				212599712693210300FE747A /* AccountInfoViewController.swift */,
-				2125997B2693210300FE747A /* SettingsViewController.swift */,
-				212599722693210300FE747A /* SetLimitsViewController.swift */,
-				212599752693210300FE747A /* TutorialViewController.swift */,
-				212599772693210300FE747A /* DeleteCasesViewController.swift */,
-				2125997C2693210300FE747A /* SubscriptionViewController.swift */,
 			);
-			path = ViewControllers;
+			path = MainViewControllers;
 			sourceTree = "<group>";
 		};
 		2125998C2693218A00FE747A /* LottieFiles */ = {
@@ -151,9 +161,9 @@
 		21259997269321AD00FE747A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				21259998269321AD00FE747A /* StockingData.swift */,
-				21259999269321AD00FE747A /* CaseDataObject.swift */,
-				2125999A269321AD00FE747A /* ProductDataObject.swift */,
+				21C387552691659B00D17F45 /* HexColors.swift */,
+				21A275C926982264008FDC3E /* UIViewDesigner.swift */,
+				21A275CB269846CE008FDC3E /* CollectionViewLeadingFlowLayout.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,22 +180,58 @@
 				212599A5269321D600FE747A /* FieldCell.swift */,
 				212599A6269321D600FE747A /* SignOutCell.swift */,
 				212599A7269321D600FE747A /* HistoryCell.swift */,
+				21A275B62695CD31008FDC3E /* ProductDashboardCell.swift */,
+				21A275BF2695F187008FDC3E /* ProductInfoCell.swift */,
 			);
 			path = ReusableCells;
 			sourceTree = "<group>";
 		};
-		212599B1269321FA00FE747A /* ReusableViews */ = {
+		212599B1269321FA00FE747A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				212599B2269321FA00FE747A /* LocationCollectionView.swift */,
-				212599B3269321FA00FE747A /* StockingHistoryView.swift */,
 				212599B4269321FA00FE747A /* ProductCollectionView.swift */,
+				212599B2269321FA00FE747A /* LocationCollectionView.swift */,
+				212599B8269321FA00FE747A /* DestinationCollectionView.swift */,
 				212599B5269321FA00FE747A /* ProductLocationCollectionHeader.swift */,
 				212599B6269321FA00FE747A /* NotConnectedView.swift */,
 				212599B7269321FA00FE747A /* LoadingView.swift */,
-				212599B8269321FA00FE747A /* DestinationCollectionView.swift */,
+				212599B3269321FA00FE747A /* StockingHistoryView.swift */,
 			);
-			path = ReusableViews;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		21A275BA2695D3E2008FDC3E /* DataObjects */ = {
+			isa = PBXGroup;
+			children = (
+				21259998269321AD00FE747A /* StockingData.swift */,
+				21259999269321AD00FE747A /* CaseDataObject.swift */,
+				2125999A269321AD00FE747A /* ProductDataObject.swift */,
+			);
+			path = DataObjects;
+			sourceTree = "<group>";
+		};
+		21A275C3269630F1008FDC3E /* ProductDashViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				21A275B82695D286008FDC3E /* ProductDashboardViewController.swift */,
+				21A275BD2695ED9C008FDC3E /* ProductInfoViewController.swift */,
+				21A275C526963258008FDC3E /* AddProductViewController.swift */,
+				21A275C72696344B008FDC3E /* ColorSelectViewController.swift */,
+			);
+			path = ProductDashViewControllers;
+			sourceTree = "<group>";
+		};
+		21A275C42696310A008FDC3E /* SettingsViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				212599712693210300FE747A /* AccountInfoViewController.swift */,
+				2125997B2693210300FE747A /* SettingsViewController.swift */,
+				212599722693210300FE747A /* SetLimitsViewController.swift */,
+				212599752693210300FE747A /* TutorialViewController.swift */,
+				212599772693210300FE747A /* DeleteCasesViewController.swift */,
+				2125997C2693210300FE747A /* SubscriptionViewController.swift */,
+			);
+			path = SettingsViewControllers;
 			sourceTree = "<group>";
 		};
 		21D29780269163BD004D7031 = {
@@ -214,13 +260,15 @@
 				21D29792269163BD004D7031 /* Main.storyboard */,
 				21D29797269163C5004D7031 /* LaunchScreen.storyboard */,
 				21D29795269163C5004D7031 /* Assets.xcassets */,
-				212599B1269321FA00FE747A /* ReusableViews */,
+				21A275BA2695D3E2008FDC3E /* DataObjects */,
 				2125999E269321D600FE747A /* ReusableCells */,
-				2125996D2693210300FE747A /* ViewControllers */,
 				21259997269321AD00FE747A /* Models */,
+				212599B1269321FA00FE747A /* Views */,
+				2125996D2693210300FE747A /* MainViewControllers */,
+				21A275C3269630F1008FDC3E /* ProductDashViewControllers */,
+				21A275C42696310A008FDC3E /* SettingsViewControllers */,
 				2125998C2693218A00FE747A /* LottieFiles */,
 				21D2978A269163BD004D7031 /* Products */,
-				21C387552691659B00D17F45 /* HexColors.swift */,
 				21D2979A269163C5004D7031 /* Info.plist */,
 				211CD55F26916A7A001235CC /* GoogleService-Info.plist */,
 				57BA6E22338FE638E9E5834C /* Pods */,
@@ -399,8 +447,10 @@
 				2125999D269321AD00FE747A /* ProductDataObject.swift in Sources */,
 				2125997E2693210300FE747A /* HomeViewController.swift in Sources */,
 				212599AE269321D600FE747A /* FieldCell.swift in Sources */,
+				21A275C82696344B008FDC3E /* ColorSelectViewController.swift in Sources */,
 				212599882693210300FE747A /* LoginViewController.swift in Sources */,
 				212599892693210300FE747A /* CreateAccountViewController.swift in Sources */,
+				21A275CA26982266008FDC3E /* UIViewDesigner.swift in Sources */,
 				21D2978D269163BD004D7031 /* AppDelegate.swift in Sources */,
 				212599872693210300FE747A /* ExpiredCasesViewController.swift in Sources */,
 				21C3875B2691659C00D17F45 /* HexColors.swift in Sources */,
@@ -412,19 +462,25 @@
 				2125997D2693210300FE747A /* StockCasesViewController.swift in Sources */,
 				212599AC269321D600FE747A /* ProductLocationCollectionCell.swift in Sources */,
 				212599812693210300FE747A /* SetLimitsViewController.swift in Sources */,
+				21A275C02695F187008FDC3E /* ProductInfoCell.swift in Sources */,
+				21A275BE2695ED9C008FDC3E /* ProductInfoViewController.swift in Sources */,
 				212599AB269321D600FE747A /* ExpiredCaseCell.swift in Sources */,
 				2125998A2693210300FE747A /* SettingsViewController.swift in Sources */,
 				212599842693210300FE747A /* TutorialViewController.swift in Sources */,
 				212599BF269321FA00FE747A /* DestinationCollectionView.swift in Sources */,
 				2125999C269321AD00FE747A /* CaseDataObject.swift in Sources */,
 				212599AF269321D600FE747A /* SignOutCell.swift in Sources */,
+				21A275B92695D286008FDC3E /* ProductDashboardViewController.swift in Sources */,
 				212599B9269321FA00FE747A /* LocationCollectionView.swift in Sources */,
+				21A275CC269846CF008FDC3E /* CollectionViewLeadingFlowLayout.swift in Sources */,
 				212599B0269321D600FE747A /* HistoryCell.swift in Sources */,
 				21D2978F269163BD004D7031 /* SceneDelegate.swift in Sources */,
 				212599AA269321D600FE747A /* ProductCell.swift in Sources */,
 				212599BD269321FA00FE747A /* NotConnectedView.swift in Sources */,
+				21A275C626963258008FDC3E /* AddProductViewController.swift in Sources */,
 				212599862693210300FE747A /* DeleteCasesViewController.swift in Sources */,
 				212599A9269321D600FE747A /* LimitSwitchCell.swift in Sources */,
+				21A275B72695CD31008FDC3E /* ProductDashboardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
