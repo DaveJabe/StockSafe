@@ -13,7 +13,11 @@
 * Quality assurance must be completed for ALL kanbans.
 * If we fail to find aggreement on some aspect of the project's code (readability, efficiency etc.), we'll consult StackOverflow, Apple Documentation, Angela Yu's Udemy videos, Harsh and/or Faiz for guidance.
 * The timeline (found below this section) will be updated weekly with 2-4 broadly defined tasks.
-* Kanbans will be under 1 of 4 possible categories: Refactoring, Feature Implementation, Design, or Bugs
+* Kanbans will be under 1 of 4 possible categories: 
+   * Refactoring
+   * Feature Implementation 
+   * Design 
+   * Bugs
 * The overarching objective is to be in the process of submitting StockSafe to the app store 10 weeks from the date of this repository's creation (which will be 9/13/2021).
 * Let's do this thing.
 
