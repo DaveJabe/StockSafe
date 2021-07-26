@@ -47,7 +47,7 @@ class StockCasesViewController: UIViewController {
     private let alerts = StockAlerts()
     
     private let manager = StockManager()
-    
+        
     @IBOutlet var selectionInterface: UIView!
     
     @IBOutlet var findCasesLabel: UILabel!
@@ -87,12 +87,10 @@ class StockCasesViewController: UIViewController {
             present(alerts.sameDestinationAlert, animated: true)
         }
         else {
-            var shelfLifeParam = ShelfLifeParameter.noNewShelfLife
-            if productSV.selectedProduct!.shelfLife!.startingPoint == destinationSV.selectedDestination!.name {
-                shelfLifeParam = .newShelfLife
-            }
-            else {
-                shelfLifeParam = .noNewShelfLife
+            stockingTable.toggleLoadingView(present: true, color: HexColor(productSV.selectedProduct!.color)?.withAlphaComponent(0.5))
+            var shelfLifeParam = ShelfLifeParameter.noNewSL
+            if productSV.selectedProduct!.shelfLife?.startingPoint.first?.value == destinationSV.selectedDestination!.name {
+                shelfLifeParam = .newSL
             }
             manager.stockAlgorithm(cases: stockingTable.selectedCases, slp: shelfLifeParam, destination: destinationSV.selectedDestination!.name) { [self] maxCapCheck, sl_string, unstockedCases in
                 if maxCapCheck == .atMaxCapacity {
@@ -168,25 +166,40 @@ class StockCasesViewController: UIViewController {
     
     private func refreshData() {
         if manager.products.count != 0 {
-            productSelect.setTitle(productSV.selectedProduct?.name, for: .normal)
-            productSelect.backgroundColor = HexColor(productSV.selectedProduct?.color ?? "#FFFFF")
-            
-            locationSelect.setTitle(locationSV.selectedLocation?.name, for: .normal)
-            locationSelect.backgroundColor = HexColor(locationSV.selectedLocation?.color ?? "#FFFFF")
-            
-            destinationSelect.setTitle(destinationSV.selectedDestination?.name, for: .normal)
-            destinationSelect.backgroundColor = HexColor(destinationSV.selectedDestination?.color ?? "#FFFFF")
-            
-            stockingTable.backgroundColor = HexColor(productSV.selectedProduct!.color)
+            stockingTable.backgroundColor = HexColor(productSV.selectedProduct!.color)?.withAlphaComponent(0.5)
             stockingTable.toggleLoadingView(present: true, color: HexColor(productSV.selectedProduct!.color))
-            
-            manager.queryFirestore(parameters: (productName: productSV.selectedProduct!.name, location: locationSV.selectedLocation!.name)) { [self] cases, sortedCases in
-                stockingTable.reloadCaseTable(cases: cases, sortedCases: sortedCases, currentCount: manager.currentCount, limit: manager.limit)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            manager.queryFirestore(parameters: (productName: productSV.selectedProduct!.name, location: productSV.selectedProduct!.locations[0]!)) { [self] cases in
+                stockingTable.reloadCaseTable(cases: cases, currentCount: manager.currentCount, limit: manager.limit)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                     self.stockingTable.toggleLoadingView(present: false, color: nil)
                 }
             }
         }
+    }
+    
+    private func getLocationKey(locationName: String) -> Int {
+        return productSV.selectedProduct!.locations.first(where: { $0.value == locationName })!.key
+    }
+    
+    private func refreshProductSelect() {
+        productSelect.setTitle(productSV.selectedProduct!.name, for: .normal)
+        productSelect.backgroundColor = HexColor(productSV.selectedProduct!.color)
+    }
+    
+    private func refreshLocations() {
+        locationSV.locationsToDisplay = manager.filterAndSortLocations(by: productSV.selectedProduct!, includeArchive: false)
+        locationSV.selectedLocation = locationSV.locationsToDisplay![0]
+        locationSelect.backgroundColor = HexColor(locationSV.locationsToDisplay![0].color)
+        locationSelect.setTitle(locationSV.locationsToDisplay![0].name, for: .normal)
+        locationSV.collectionView.reloadData()
+    }
+    
+    private func refreshDestinations() {
+        destinationSV.destinationsToDisplay = manager.filterAndSortLocations(by: productSV.selectedProduct!, includeArchive: true)
+        destinationSV.selectedDestination = destinationSV.destinationsToDisplay![0]
+        destinationSelect.setTitle(destinationSV.destinationsToDisplay![0].name, for: .normal)
+        destinationSelect.backgroundColor = HexColor(destinationSV.destinationsToDisplay![0].color)
+        destinationSV.collectionView.reloadData()
     }
 
     private func tuckAwaySelectionViews() {
@@ -204,12 +217,6 @@ class StockCasesViewController: UIViewController {
     }
 
     private func setUpButtons() {
-        if manager.products.count != 0 {
-            
-            
-           
-            
-        }
         productSelect.titleLabel!.font = VD.boldFont(size: 20)
         productSelect.setTitleColor(.black, for: .normal)
         productSelect.addTarget(self, action: #selector(toggleSelectionView(_:)), for: .touchUpInside)
@@ -250,45 +257,6 @@ class StockCasesViewController: UIViewController {
         monitor.start(queue: queue)
     }
     
-    
-    private func getDate() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        let timeFormatter = DateFormatter()
-        timeFormatter.timeStyle = .short
-        dateLabel.text = dateFormatter.string(from: Date())
-        timeLabel.text = timeFormatter.string(from: Date())
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        getDate()
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in self.getDate() }
-                
-        view.addSubview(productSV)
-        view.addSubview(locationSV)
-        view.addSubview(destinationSV)
-        view.addSubview(connectionMonitor)
-        
-        stockingTable.register(CaseCell.self, forCellReuseIdentifier: CaseCell.identifier)
-        
-        productSV.mediator = self
-        locationSV.mediator = self
-        destinationSV.mediator = self
-        stockingTable.mediator = self
-        manager.mediator = self
-        alerts.mediator = self
-        
-        manager.configureProducts()
-        
-        undoButton.isEnabled = false
-        undoButton.tintColor = .systemGray
-
-        setUpNetworkMonitor()
-        setUpButtons()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         VD.addShadow(view: selectionInterface)
@@ -297,13 +265,42 @@ class StockCasesViewController: UIViewController {
         VD.addSubtleShadow(view: productLabel)
         VD.addSubtleShadow(view: locationLabel)
         VD.addSubtleShadow(view: destinationLabel)
+        VD.addShadow(view: stockingTable)
         VD.addShadow(view: stockButton)
         VD.addShadow(view: dateLabel)
         VD.addShadow(view: timeLabel)
-        VD.addShadow(view: stockingTable)
         VD.addShadow(view: productSelect)
         VD.addShadow(view: locationSelect)
         VD.addShadow(view: destinationSelect)
+        setUpButtons()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        VD.getDate(dateLabel: dateLabel, timeLabel: timeLabel)
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in VD.getDate(dateLabel: dateLabel, timeLabel: timeLabel) }
+                
+        view.addSubview(productSV)
+        view.addSubview(locationSV)
+        view.addSubview(destinationSV)
+        view.addSubview(connectionMonitor)
+        
+        stockingTable.register(CaseCell.self, forCellReuseIdentifier: CaseCell.identifier)
+        
+        productSV.setMediator(mediator: self)
+        locationSV.setMediator(mediator: self)
+        destinationSV.setMediator(mediator: self)
+        stockingTable.setMediator(mediator: self)
+        manager.setMediator(mediator: self)
+        alerts.setMediator(mediator: self)
+        
+        manager.configureProducts()
+        
+        undoButton.isEnabled = false
+        undoButton.tintColor = .systemGray
+
+        setUpNetworkMonitor()
         setUpButtons()
     }
     
@@ -321,42 +318,41 @@ extension StockCasesViewController: MediatorProtocol {
             if manager.products.count != 0 {
                 productSV.productsToDisplay = manager.products
                 productSV.selectedProduct = manager.products[0]
-                productSelect.backgroundColor = HexColor(productSV.selectedProduct!.color)
-                productSelect.setTitle(productSV.selectedProduct!.name, for: .normal)
+                refreshProductSelect()
                 productSV.collectionView.reloadData()
                 
-                locationSV.locationsToDisplay = manager.filterAndSortLocations(by: productSV.selectedProduct!, for: .locations)
-                locationSV.selectedLocation = locationSV.locationsToDisplay![0]
-                locationSelect.backgroundColor = HexColor(locationSV.locationsToDisplay![0].color)
-                locationSelect.setTitle(locationSV.locationsToDisplay![0].name, for: .normal)
-                locationSV.collectionView.reloadData()
+                refreshLocations()
                 
-                destinationSV.destinationsToDisplay = manager.filterAndSortLocations(by: productSV.selectedProduct!, for: .destinations)
-                destinationSV.selectedDestination = destinationSV.destinationsToDisplay![0]
-                destinationSelect.setTitle(destinationSV.destinationsToDisplay![0].name, for: .normal)
-                destinationSelect.backgroundColor = HexColor(destinationSV.destinationsToDisplay![0].color)
-                destinationSV.collectionView.reloadData()
+                refreshDestinations()
+                
+                refreshData()
             }
-            refreshData()
+            else {
+                productSelect.setTitle("No Products", for: .normal)
+                locationSelect.setTitle("No Locations", for: .normal)
+                destinationSelect.setTitle("No Destinations", for: .normal)
+            }
         case .selectionChanged(let type):
             tuckAwaySelectionViews()
             switch type {
                 case .products:
-                    productSelect.setTitle(productSV.selectedProduct!.name, for: .normal)
-                    productSV.collectionView.reloadData()
                     
-                    locationSV.locationsToDisplay = manager.filterAndSortLocations(by: productSV.selectedProduct!, for: .locations)
-                    locationSV.selectedLocation = locationSV.locationsToDisplay![0]
-                    locationSV.collectionView.reloadData()
+                    refreshProductSelect()
                     
-                    destinationSV.locationsToDisplay = manager.filterAndSortLocations(by: productSV.selectedProduct!, for: .destinations)
-                    destinationSV.selectedDestination = destinationSV.destinationsToDisplay![0]
-                    destinationSV.collectionView.reloadData()
+                    refreshLocations()
+                    
+                    refreshDestinations()
+                    
                     refreshData()
+                    
                 case .locations:
+                    locationSelect.backgroundColor = HexColor(locationSV.selectedLocation!.color)
                     locationSelect.setTitle(locationSV.selectedLocation!.name, for: .normal)
+                    
                     refreshData()
+                    
                 case .destinations:
+                    destinationSelect.backgroundColor = HexColor(destinationSV.selectedDestination!.color)
                     destinationSelect.setTitle(destinationSV.selectedDestination!.name, for: .normal)
                 }
         default:
@@ -367,7 +363,7 @@ extension StockCasesViewController: MediatorProtocol {
     func relayInfo(sender: ColleagueProtocol, info: Any) {
         // Checking if the relayed info is in the specific type required to execute the code within the 'if' statement
         if let info = info as? (ShelfLifeParameter, [Case]) {
-            manager.stockAlgorithm(cases: info.1, slp: info.0, destination: destinationSV.selectedLocation!.name) { [self] maxCapCheck, sl_string, unstockedCases in
+            manager.stockAlgorithm(cases: info.1, slp: info.0, destination: destinationSV.selectedDestination!.name) { [self] maxCapCheck, sl_string, unstockedCases in
                 refreshData()
             }
         }

@@ -67,19 +67,16 @@ class LocationManager: ColleagueProtocol {
     }
     
     // Filters locations and returns an array of locations respective to the Product passed in
-    public func filterAndSortLocations(by product: Product, for type: SelectionViewType?) -> [Location] {
+    public func filterAndSortLocations(by product: Product, includeArchive: Bool) -> [Location] {
         var filteredLocations = [Location]()
         let locationRefs = product.locations.sorted(by: { $0.key < $1.key })
-        for index in locationRefs.indices {
-            filteredLocations.append(locations.first(where: { $0.name == locationRefs[index].value })!)
-        }
-        switch type {
-        case .locations:
-            filteredLocations.removeLast()
-        case .destinations:
-            filteredLocations.removeFirst()
-        default:
-            print("Error in filterAndSortLocations() - type: \(String(describing: type))")
+        if locationRefs.count != 0 {
+            for index in locationRefs.indices {
+                filteredLocations.append(locations.first(where: { $0.name == locationRefs[index].value })!)
+            }
+            if !includeArchive {
+                filteredLocations.removeLast()
+            }
         }
         return filteredLocations
     }
@@ -114,13 +111,8 @@ class LocationManager: ColleagueProtocol {
             locationStrings.append(location.name)
         }
         if !locationStrings.isEmpty {
-            switch type {
-            case .locations:
+            if type == .locations {
                 locationStrings.removeLast()
-            case .destinations:
-                locationStrings.removeFirst()
-            default:
-                print("All locations will be returned")
             }
         }
         return locationStrings

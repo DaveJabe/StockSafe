@@ -144,6 +144,7 @@ class NewCaseViewController: UIViewController {
                 present(alerts.rangeInvalidAlert, animated: true)
             }
             else {
+                newCasesTable.toggleLoadingView(present: true, color: HexColor(productSV.selectedProduct!.color))
                 let casesToAdd = Array(Int(caseNumRangeTF.text!)!...Int(caseNumRangeTF2.text!)!)
                 manager.multipleNewCasesAlgo(caseAttributes: (caseRange: casesToAdd,
                                                               name: productSV.selectedProduct!.name,
@@ -166,8 +167,8 @@ class NewCaseViewController: UIViewController {
         if manager.products.count != 0 {
             newCasesTable.backgroundColor = HexColor(productSV.selectedProduct!.color)?.withAlphaComponent(0.5)
             newCasesTable.toggleLoadingView(present: true, color: HexColor(productSV.selectedProduct!.color))
-            manager.queryFirestore(parameters: (productName: productSV.selectedProduct!.name, location: productSV.selectedProduct!.locations[0]!)) { [self] cases, sortedCases in
-                newCasesTable.reloadCaseTable(cases: cases, sortedCases: sortedCases, currentCount: manager.currentCount, limit: manager.limit)
+            manager.queryFirestore(parameters: (productName: productSV.selectedProduct!.name, location: productSV.selectedProduct!.locations[0]!)) { [self] cases in
+                newCasesTable.reloadCaseTable(cases: cases, currentCount: manager.currentCount, limit: manager.limit)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                     self.newCasesTable.toggleLoadingView(present: false, color: nil)
                 }
@@ -176,17 +177,17 @@ class NewCaseViewController: UIViewController {
     }
     
     private func getSLP() -> ShelfLifeParameter {
-        if productSV.selectedProduct!.locations[0] == productSV.selectedProduct!.shelfLife?.startingPoint {
-            return .newShelfLife
+        if productSV.selectedProduct!.locations.first?.value == productSV.selectedProduct!.shelfLife?.startingPoint.first?.value {
+            return .newSL
         }
         else {
-            return .noNewShelfLife
+            return .noNewSL
         }
     }
     
     private func setUpSelectionInterface() {
         if manager.products.count == 0 {
-            productSelect.setTitle("No Products Found", for: .normal)
+            productSelect.setTitle("No Products", for: .normal)
         }
         else {
             productSelect.setTitle(manager.products[0].name, for: .normal)
@@ -231,15 +232,6 @@ class NewCaseViewController: UIViewController {
         }
     }
     
-    private func getDate() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        let timeFormatter = DateFormatter()
-        timeFormatter.timeStyle = .short
-        dateLabel.text = dateFormatter.string(from: Date())
-        timeLabel.text = timeFormatter.string(from: Date())
-    }
-    
     private func setUpConnectionMonitor() {
         view.addSubview(connectionMonitor)
         monitor.pathUpdateHandler = { [self] path in
@@ -280,13 +272,13 @@ class NewCaseViewController: UIViewController {
         caseNumRangeTF.borderStyle = .roundedRect
         caseNumRangeTF2.borderStyle = .roundedRect
         
-        numOfCasesText.text = "1"
+        numOfCasesText.placeholder = "1"
         
         caseNumRangeTF.backgroundColor = .white
         caseNumRangeTF.frame = CGRect(x: 65, y: 263, width: numOfCasesText.frame.size.width, height: numOfCasesText.frame.size.height)
         caseNumRangeTF.font = VD.standardFont(size: 20)
         caseNumRangeTF.inputView = caseNumRangePV
-        caseNumRangeTF.text = "1"
+        caseNumRangeTF.placeholder = "1"
         
         caseNumRangeTF2.backgroundColor = .white
         caseNumRangeTF2.frame = CGRect(x: 165, y: 263, width: numOfCasesText.frame.size.width, height: numOfCasesText.frame.size.height)
@@ -296,7 +288,7 @@ class NewCaseViewController: UIViewController {
         
         caseNumRangeLabel.text = "-"
         caseNumRangeLabel.font = VD.standardFont(size: 40)
-        caseNumRangeLabel.frame = CGRect(x: 145, y: 266, width: 100, height: 46)
+        caseNumRangeLabel.frame = CGRect(x: 142, y: 266, width: 100, height: 46)
         
         selectionInterface.addSubview(caseNumRangeTF)
         selectionInterface.addSubview(caseNumRangeTF2)
@@ -308,9 +300,9 @@ class NewCaseViewController: UIViewController {
                     
         multipleCasesToggle(multipleCasesSwitch)
         
-        getDate()
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (Timer) in
-            self.getDate()
+        VD.getDate(dateLabel: dateLabel, timeLabel: timeLabel)
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] (Timer) in
+            VD.getDate(dateLabel: dateLabel, timeLabel: timeLabel)
         })
         
         view.addSubview(productSV)

@@ -48,15 +48,15 @@ class StockAlerts: ColleagueProtocol {
     
     public func configureSLAlert(cases: [Case], sl_String: String) -> UIAlertController {
         let shelfLifeAlert = UIAlertController(title: nil,
-                                                            message: "Would you like to restart their shelf lives?",
+                                                            message: "Shelf life for this product begins at a later location, would you like to erase the shelf lives for these cases?",
                                                             preferredStyle: .alert)
         shelfLifeAlert.title = "Cases \(sl_String) already have shelf lives"
-        shelfLifeAlert.addAction(UIAlertAction(title: "Stock cases and restart shelf lives",
+        shelfLifeAlert.addAction(UIAlertAction(title: "Stock cases and erase shelf lives",
                                                      style: .default,
-                                                     handler: { [self] _ in mediator?.relayInfo(sender: self, info: (ShelfLifeParameter.replace, cases)) } ))
-        shelfLifeAlert.addAction(UIAlertAction(title: "Stock cases but don't restart shelf lives",
+                                                     handler: { [self] _ in mediator?.relayInfo(sender: self, info: (ShelfLifeParameter.eraseSL, cases)) } ))
+        shelfLifeAlert.addAction(UIAlertAction(title: "Stock cases but don't erase shelf lives",
                                                      style: .default,
-                                                     handler: { [self] _ in mediator?.relayInfo(sender: self, info: (ShelfLifeParameter.doNotReplace, cases)) } ))
+                                                     handler: { [self] _ in mediator?.relayInfo(sender: self, info: (ShelfLifeParameter.doNotEraseSL, cases)) } ))
         shelfLifeAlert.addAction(UIAlertAction(title: "Don't stock cases",
                                                      style: .default,
                                                      handler: nil))

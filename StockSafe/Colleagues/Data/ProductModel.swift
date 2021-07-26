@@ -56,9 +56,9 @@ struct Limit: Codable, Hashable {
 struct ShelfLife: Codable, Hashable {
     // The amount of time a product can be held (after its shelflife begins) ***in hours
     // Optional because a product may not have a shelflife
-    let shelfLife: Int?
+    let shelfLife: Int
     
     // This is a reference to the location at which a products shelflife begins
     // Optional because a product may not have a shelflife
-    let startingPoint: String?
+    let startingPoint: [Int:String]
 }

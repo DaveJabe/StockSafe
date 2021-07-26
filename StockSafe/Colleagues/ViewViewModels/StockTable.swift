@@ -13,16 +13,24 @@ class StockTable: CaseTable {
     
     override func setMediator(mediator: MediatorProtocol) {
         self.mediator = mediator
+        noCasesLabel.frame = bounds
+        
+        buildHeader()
+        
+        delegate = self
+        dataSource = self
         allowsSelection = true
         allowsMultipleSelection = true
     }
+
 }
 
 extension StockTable {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCases.append(sortedCases[indexPath.row])
+        print("row was selected")
+        selectedCases.append(cases[indexPath.row].0)
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        selectedCases.removeAll(where: {$0 == sortedCases[indexPath.row]} )
+        selectedCases.removeAll(where: {$0 == cases[indexPath.row].0} )
     }
 }

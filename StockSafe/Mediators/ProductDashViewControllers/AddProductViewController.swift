@@ -12,7 +12,7 @@ class AddProductViewController: UIViewController {
     private var manager = ProductManager.init()
     
     private var productName: String = ""
-    private var shelfLifeBegins: String?
+    private var shelfLifeBegins: [Int:String]?
     private var shelfLife: (Int, String) = (0, "")
     public var selectedColor = "#D32F2F"
     
@@ -20,10 +20,12 @@ class AddProductViewController: UIViewController {
     private var currentSelections = [0:""]
     
     
-    @IBOutlet var addNewProductLabel: UILabel!
+    @IBOutlet var backgroundView: UIView!
     
     @IBOutlet weak var addProductTable: UITableView!
     
+    @IBOutlet var addNewProductLabel: UILabel!
+        
     @IBOutlet var addNewProductButton: UIButton!
     
     @IBAction func addNewProduct(_sender: UIButton) {
@@ -42,6 +44,7 @@ class AddProductViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        VD.addShadow(view: backgroundView)
         VD.addShadow(view: addNewProductButton)
         VD.addSubtleShadow(view: addNewProductLabel)
     }
@@ -107,14 +110,12 @@ extension AddProductViewController: UITableViewDelegate, UITableViewDataSource {
                 for selection in currentSelections.values {
                     rowTitles.append(selection)
                 }
-                print(rowTitles)
             }
-            cell.changeToPTF(rowData: [rowTitles], components: 1, header: "Where does the shelf life for \(productName) begin?")
+            cell.changeToPTF(rowData: [rowTitles], components: 1, header: "Where does the shelf life for \(productName) begin?", tag: 2)
             cell.title.text = "Shelf Life Start Location"
             cell.textField.placeholder = "Cooler"
-            cell.textField.text = shelfLifeBegins
+            cell.textField.text = shelfLifeBegins?.first?.value
             cell.setDelegate(delegate: self)
-            cell.tag = 2
             
             if currentSelections == [0:""] || productName == "" {
                 cell.textField.toggle(enable: false)
@@ -132,13 +133,12 @@ extension AddProductViewController: UITableViewDelegate, UITableViewDataSource {
             let shelfLifeRowData: [[String]] = [array.map({ String($0) }),
                                                 ["Hours", "Days"]]
             cell.title.text = "Length of Shelf Life"
-            cell.changeToPTF(rowData: shelfLifeRowData, components: 2, header: "How long is the shelf life for \(productName)?")
+            cell.changeToPTF(rowData: shelfLifeRowData, components: 2, header: "How long is the shelf life for \(productName)?", tag: 3)
             cell.textField.placeholder = "1 Day"
             if shelfLife != (0,"") {
                 cell.textField.text = "\(shelfLife.0) \(shelfLife.1)"
             }
             cell.setDelegate(delegate: self)
-            cell.tag = 3
             if currentSelections == [0:""] || productName == "" {
                 cell.textField.toggle(enable: false)
             }
@@ -183,13 +183,14 @@ extension AddProductViewController: TextFieldCellDelegate, EPTFCDelegate {
                 cell2?.textField.toggle(enable: false)
             }
         case 2:
-            shelfLifeBegins = text
+            if let slbegins = currentSelections.first(where: { $0.value == text } )?.key {
+                shelfLifeBegins = [slbegins:text]
+            }
         case 3:
             if text != "" {
                 let subStrings = text.split(separator: " ")
                 shelfLife.0 = Int(subStrings[0])!
                 shelfLife.1 = String(subStrings[1])
-                print(shelfLife)
             }
         default:
             print("Error in func returnText(senderTag: \(senderTag), text: \(text)")
@@ -199,7 +200,7 @@ extension AddProductViewController: TextFieldCellDelegate, EPTFCDelegate {
     func readyForReload(numOfTextFields: Int, currentSelections: [Int : String]) {
         self.currentSelections = currentSelections
         self.numOfTextFields = numOfTextFields
-        addProductTable.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+        addProductTable.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
         addProductTable.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
         addProductTable.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
     }
@@ -214,7 +215,7 @@ extension AddProductViewController: TextFieldCellDelegate, EPTFCDelegate {
             cell2?.textField.toggle(enable: false)
         }
         else {
-            cell1?.changeToPTF(rowData: [currentSelections.values.compactMap({ $0 as String })], components: 1, header: "Where does the shelf life for \(productName) begin?")
+            cell1?.changeToPTF(rowData: [currentSelections.values.compactMap({ $0 as String })], components: 1, header: "Where does the shelf life for \(productName) begin?", tag: 2)
             cell1?.textField.placeholder = "Cooler"
             cell1?.textField.toggle(enable: true)
             cell2?.textField.toggle(enable: true)

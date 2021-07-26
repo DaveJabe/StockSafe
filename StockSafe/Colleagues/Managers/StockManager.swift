@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Firebase
 
 class StockManager: CaseManager {
     
     public func stockAlgorithm(cases: [Case], slp: ShelfLifeParameter, destination: String, completion: @escaping ((CapacityCheck, String?, [Case]?) -> Void)) {
+        UserDefaults.standard.setValue(false, forKey: "SetLimitsKey") // temporary code in place until limits are implemented
         undoQueue.append((cases, cases[0].location))
         var sl_string: String?
         var casesWithSL: [Case]?
@@ -22,14 +24,7 @@ class StockManager: CaseManager {
         let group = DispatchGroup()
         for caseToStock in cases {
             group.enter()
-            switch slp {
-            case .replace:
-                stockCase(caseID: caseToStock.id!, destination: destination, newShelfLife: true)
-            case .doNotReplace:
-                stockCase(caseID: caseToStock.id!, destination: destination, newShelfLife: false)
-            default:
-                casesWithSL?.append(caseToStock)
-            }
+            stockCase(caseToStock: caseToStock, destination: destination, slp: slp)
             group.leave()
         }
         group.notify(queue: DispatchQueue.main) {
@@ -43,22 +38,37 @@ class StockManager: CaseManager {
                         sl_string?.append("and ")
                     }
                 }
-            }
             completion(.notAtMaxCapacity, sl_string, casesWithSL)
+            }
         }
     }
     
-    private func stockCase(caseID: String, destination: String, newShelfLife: Bool) {
-        let document = db.collection("testData").document(caseID)
-        if newShelfLife {
+    private func stockCase(caseToStock: Case, destination: String, slp: ShelfLifeParameter) {
+        let document = db.collection("testData").document(caseToStock.id!)
+        
+        if slp == .newSL {
             document.updateData(["location" : destination,
-                                 "shelfLife" : Date()])
+                                 "shelfLife" : Timestamp()]) { error in
+                if error != nil {
+                    print("Error updating data in stockCase() -- .newSL: \(String(describing: error))")
+                }
+            }
         }
-        else if destination == "Archive" {
-            document.delete()
+        else if slp == .noNewSL || slp == .doNotEraseSL {
+            if destination == "Archive" {
+                document.delete()
+            }
+            else {
+                document.updateData(["location" : destination])
+            }
         }
-        else {
-            document.updateData(["location" : destination])
+        else if slp == .eraseSL {
+            document.updateData(["location" : destination,
+                                 "shelfLife" : FieldValue.delete()]) { error in
+                if error != nil {
+                    print("Error updating data in stockCase() -- .eraseSL: \(String(describing: error))")
+                }
+            }
         }
     }
 }

@@ -14,10 +14,7 @@ class CaseTable: UITableView, ColleagueProtocol {
     public weak var mediator: MediatorProtocol?
     
     // Dictionary with Cases as keys and Strings (expiration Dates) as values
-    public var cases: [Case:String] = [:]
-    
-    // Array of sorted Cases (from `cases` dictionary)
-    public var sortedCases: [Case] = []
+    public var cases: [(Case,String)] = []
     
     // Loading view for when table is reloading its rows (cases)
     private let loadingView = LoadingView.init()
@@ -44,14 +41,14 @@ class CaseTable: UITableView, ColleagueProtocol {
     }()
     
     // Label to display when no cases are found
-    private var noCasesLabel: UILabel = {
+    public var noCasesLabel: UILabel = {
         let label = UILabel()
         label.text = "No Cases Found"
         label.font = VD.standardFont(size: 20)
         label.textAlignment = .center
         return label
     }()
-    
+
     public func setMediator(mediator: MediatorProtocol) {
         self.mediator = mediator
         noCasesLabel.frame = bounds
@@ -76,13 +73,12 @@ class CaseTable: UITableView, ColleagueProtocol {
         loadingView.layer.cornerRadius = 10
     }
         
-    public func reloadCaseTable(cases: [Case:String], sortedCases: [Case], currentCount: Int, limit: Int) {
+    public func reloadCaseTable(cases: [(Case, String)], currentCount: Int, limit: Int) {
         self.cases = cases
-        self.sortedCases = sortedCases
         reloadData()
         if cases.count > 0 {
             backgroundView = nil
-            headerLabel.text = "Cases in \(sortedCases[0].location)"
+            headerLabel.text = "Cases in \(cases[0].0.location)"
         }
         else {
             backgroundView = noCasesLabel
@@ -111,7 +107,7 @@ class CaseTable: UITableView, ColleagueProtocol {
         }
     }
     
-    private func buildHeader() {
+    public func buildHeader() {
         header.backgroundColor = .white
         header.addSubview(limitLabel)
         header.addSubview(headerLabel)
@@ -168,29 +164,29 @@ extension CaseTable: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedCases.count
+        return cases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let caseCell = tableView.dequeueReusableCell(withIdentifier: CaseCell.identifier, for: indexPath) as? CaseCell else {
             return UITableViewCell()
         }
-        
-        let caseAtIndexPath = sortedCases[indexPath.row]
+                
+        let caseAtIndexPath = cases[indexPath.row]
         
         caseCell.backgroundColor = backgroundColor?.withAlphaComponent(0.5)
         caseCell.numberLabel.backgroundColor = caseCell.backgroundColor?.withAlphaComponent(1)
         
-        if cases[caseAtIndexPath] == "Expired" {
+        if caseAtIndexPath.1 == "Expired" {
             caseCell.shelfLifeLabel.textColor = .systemRed
         }
         else {
             caseCell.shelfLifeLabel.textColor = .darkText
         }
         
-        caseCell.numberLabel.text = String(caseAtIndexPath.caseNumber)
-        caseCell.productLabel.text = caseAtIndexPath.product
-        caseCell.shelfLifeLabel.text = cases[caseAtIndexPath]
+        caseCell.numberLabel.text = String(caseAtIndexPath.0.caseNumber)
+        caseCell.productLabel.text = caseAtIndexPath.0.product
+        caseCell.shelfLifeLabel.text = caseAtIndexPath.1
        
         return caseCell
     }

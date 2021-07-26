@@ -102,6 +102,17 @@ class ViewDesigner: UIViewController {
         
         collectionView.setCollectionViewLayout(layout, animated: true)
     }
+    
+    
+    static func getDate(dateLabel: UILabel, timeLabel: UILabel) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        let timeFormatter = DateFormatter()
+        timeFormatter.timeStyle = .short
+        dateLabel.text = dateFormatter.string(from: Date())
+        timeLabel.text = timeFormatter.string(from: Date())
+    }
+    
 }
 extension UITextView {
     

@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Firebase
 
 enum ShelfLifeParameter {
-    case newShelfLife
-    case noNewShelfLife
-    case replace
-    case doNotReplace
+    case newSL
+    case noNewSL
+    case eraseSL
+    case doNotEraseSL
 }
 
 enum CaseExistsCheck {
@@ -39,10 +40,9 @@ class CaseManager: ProductManager {
     private var casesQueue: ([Case], ShelfLifeParameter, String)?
     
     // Query firestore for data (cases)
-    public func queryFirestore(parameters: (productName: String, location: String), completion: @escaping (([Case:String], [Case]) -> Void)) {
+    public func queryFirestore(parameters: (productName: String, location: String), completion: @escaping ([(Case, String)]) -> Void) {
         // Creating the array and dictionary for storing case information
-        var cases: [Case:String] = [:]
-        var sortedCases: [Case] = []
+        var cases: [(Case, String)] = []
         // Setting search parameters
         let searchRef = db.collection("testData")
             .whereField("product", isEqualTo: parameters.0)
@@ -63,14 +63,19 @@ class CaseManager: ProductManager {
                 let group = DispatchGroup()
                 for document in documents {
                     group.enter()
-                    let thisCase = try? document.data(as: Case.self)
-                    let expiryDate = getExpirationDate(timestamp: thisCase?.shelfLife)
-                    cases[thisCase!] = expiryDate
-                    group.leave()
+                    do {
+                        let caseKey = try document.data(as: Case.self)
+                        let expiryDate = getExpirationDate(timestamp: caseKey!.shelfLife)
+                        cases.append((caseKey!, expiryDate))
+                        group.leave()
+                    }
+                    catch let error {
+                        print("Error reading document (case) from Firestore: \(error)")
+                    }
                 }
                 group.notify(queue: DispatchQueue.main) {
-                    sortedCases = cases.keys.sorted(by: {$0.caseNumber < $1.caseNumber})
-                    completion(cases, sortedCases)
+                    cases.sort(by: { $0.0 < $1.0 })
+                    completion(cases)
                 }
             }
         }
@@ -146,11 +151,11 @@ class CaseManager: ProductManager {
     }
 
     public func addCase(caseAttributes: (number: Int, productName: String, location: String), slp: ShelfLifeParameter, completion: (() -> Void)?) {
-        var shelfLifeBegins: Date?
+        var shelfLifeBegins: Timestamp?
         switch slp {
-        case .newShelfLife:
-            shelfLifeBegins = Date()
-        case .noNewShelfLife:
+        case .newSL:
+            shelfLifeBegins = Timestamp()
+        case .noNewSL:
             shelfLifeBegins = nil
         default:
             print("Error in NewCaseViewController.swift - addCase()")
@@ -158,7 +163,7 @@ class CaseManager: ProductManager {
         let caseToAdd = Case(product: caseAttributes.1,
                              location: caseAttributes.2,
                              caseNumber: caseAttributes.0,
-                             entryDate: Date(),
+                             entryDate: Timestamp(),
                              shelfLife: shelfLifeBegins,
                              userID: userIDkey)
         let _ = try? db.collection("testData").addDocument(from: caseToAdd) { error in
@@ -217,13 +222,15 @@ class CaseManager: ProductManager {
     }
     
     
-    private func getExpirationDate(timestamp: Date?) -> String {
+    private func getExpirationDate(timestamp: Timestamp?) -> String {
         var expirationDate = ""
         if timestamp != nil {
+            let timeStamp = (timestamp as AnyObject).dateValue()
+            print("this is timestamp: \(timeStamp)")
             let offsetDate = Calendar.current.date(byAdding: .hour, value: -4, to: Date())
             
-            let components = Calendar.current.dateComponents([.day], from: timestamp!, to: offsetDate!)
-            let hourComponents = Calendar.current.dateComponents([.hour], from: timestamp!, to: offsetDate!)
+            let components = Calendar.current.dateComponents([.day], from: timeStamp, to: offsetDate!)
+            let hourComponents = Calendar.current.dateComponents([.hour], from: timeStamp, to: offsetDate!)
             
             let daysRemaining = 4 - components.day!
             let hoursRemaining = 96 - hourComponents.hour!
@@ -243,6 +250,7 @@ class CaseManager: ProductManager {
                 expirationDate = "Expires in \(daysRemaining) days"
             }
         }
+        print("This is expirationDate: \(expirationDate)")
         return expirationDate
     }
     
