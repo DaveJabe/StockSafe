@@ -82,8 +82,7 @@ extension LocationDashboardViewController: UICollectionViewDelegate, UICollectio
             return UICollectionReusableView()
         }
         header.backgroundColor = .clear
-        header.title.textAlignment = .left
-        header.title.text = "   Select A Location"
+        header.title.text = "Select A Location"
         return header
     }
     

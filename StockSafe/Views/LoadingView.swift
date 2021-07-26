@@ -22,14 +22,13 @@ class LoadingView: UIView {
     }
     
     private func configureLayout() {
-        self.backgroundColor = .white
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 10
-        self.addSubview(loadingAnimation)
-        loadingAnimation.frame = self.bounds
+        backgroundColor = .white
+        layer.masksToBounds = true
+        layer.cornerRadius = 10
+        addSubview(loadingAnimation)
+        loadingAnimation.frame = bounds
         loadingAnimation.animation = Animation.named("loadingBox")
         loadingAnimation.loopMode = .loop
         loadingAnimation.contentMode = .center
     }
-    
 }

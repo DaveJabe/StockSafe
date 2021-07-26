@@ -41,6 +41,7 @@ class CaseCell: UITableViewCell {
         contentView.addSubview(productLabel)
         contentView.addSubview(shelfLifeLabel)
         
+        selectionStyle = .default
         accessoryType = .none
     }
     
@@ -51,7 +52,7 @@ class CaseCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         numberLabel.frame = CGRect(x: 0, y: 0, width: 50, height: contentView.frame.size.height)
-        productLabel.frame = CGRect(x: 70, y: 0, width: 257, height: contentView.frame.size.height)
-        shelfLifeLabel.frame = CGRect(x: 470, y: 0, width: 193, height: contentView.frame.size.height)
+        productLabel.frame = CGRect(x: 70, y: 0, width: 260, height: contentView.frame.size.height)
+        shelfLifeLabel.frame = CGRect(x: contentView.frame.maxX-215, y: 0, width: 200, height: contentView.frame.size.height)
     }
 }

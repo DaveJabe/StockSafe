@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseFirestore
-
 
 class ProductManager: LocationManager {
     
@@ -43,7 +40,7 @@ class ProductManager: LocationManager {
             }
     }
     
-    public func newShelfLife(shelfLife: Int, hoursOrDays: String, startingPoint: String) -> ShelfLife {
+    public func newShelfLife(shelfLife: Int, hoursOrDays: String, startingPoint: [Int:String]) -> ShelfLife {
         var sl: Int
         if hoursOrDays != "Hours" || hoursOrDays != "Hour" {
             sl = 24 * shelfLife
@@ -51,7 +48,7 @@ class ProductManager: LocationManager {
         else {
             sl = shelfLife
         }
-        return ShelfLife(shelfLife: sl, startingPoint: hoursOrDays)
+        return ShelfLife(shelfLife: sl, startingPoint: startingPoint)
     }
     
     public func addNewProduct(name: String, locations: [Int:String], shelfLife: ShelfLife?, color: String, completion: () -> Void) {

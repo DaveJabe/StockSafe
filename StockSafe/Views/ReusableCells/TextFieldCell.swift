@@ -32,7 +32,7 @@ class TextFieldCell: UITableViewCell {
         backgroundColor = .systemGray5
         addSubview(title)
         contentView.addSubview(textField)
-        textField.addTarget(self, action: #selector(sendBackText(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(sendBackText(_:)), for: .allEditingEvents)
     }
     
     required init?(coder: NSCoder) {
@@ -52,20 +52,27 @@ class TextFieldCell: UITableViewCell {
                                  height: 35)
     }
     
-    @objc private func sendBackText(_ sender: UITextField) {
-        delegate?.returnText(senderTag: tag, text: textField.text ?? "")
+    @objc private func sendBackText(_ sender: Any) {
+        if let sender = sender as? PickerTextField {
+            delegate?.returnText(senderTag: sender.tag, text: textField.text ?? "")
+        }
+        else if let sender = sender as? UITextField {
+            delegate?.returnText(senderTag: sender.tag, text: textField.text ?? "")
+        }
     }
     
     public func setDelegate(delegate: TextFieldCellDelegate) {
         self.delegate = delegate
     }
     
-    public func changeToPTF(rowData: [[String]], components: Int, header: String?) {
+    public func changeToPTF(rowData: [[String]], components: Int, header: String?, tag: Int) {
         textField = PickerTextField.init(frame: textField.frame,
                                     rowData: rowData,
                                     components: components,
                                     header: header)
+        textField.tag = tag
         textField.textAlignment = .center
+        textField.addTarget(self, action: #selector(sendBackText(_:)), for: .allEditingEvents)
         addSubview(textField)
         
     }

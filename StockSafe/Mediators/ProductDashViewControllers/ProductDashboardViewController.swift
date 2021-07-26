@@ -64,8 +64,7 @@ extension ProductDashboardViewController: UICollectionViewDelegate, UICollection
             return UICollectionReusableView()
         }
         header.backgroundColor = .clear
-        header.title.textAlignment = .left
-        header.title.text = "    Select A Product"
+        header.title.text = "Select A Product"
         return header
     }
     

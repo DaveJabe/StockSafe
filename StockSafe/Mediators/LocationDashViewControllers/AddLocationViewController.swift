@@ -15,6 +15,8 @@ class AddLocationViewController: UIViewController {
     
     public var locationColor = "#A93226"
     
+    @IBOutlet var backgroundView: UIView!
+    
     @IBOutlet var addNewLocationLabel: UILabel!
     
     @IBOutlet var addLocationTable: UITableView!
@@ -32,6 +34,7 @@ class AddLocationViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        VD.addShadow(view: backgroundView)
         VD.addShadow(view: addLocationButton)
         VD.addSubtleShadow(view: addNewLocationLabel)
     }
