@@ -81,9 +81,10 @@ extension AddProductViewController: UITableViewDelegate, UITableViewDataSource {
             return CGFloat(88*(numOfTextFields))+88
         }
     }
-    
+        //Add new products functionalities
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
+        //code for cell that stores user inputed product name.
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldCell.identifier, for: indexPath) as? TextFieldCell else {
                 return UITableViewCell()
@@ -94,11 +95,12 @@ extension AddProductViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setDelegate(delegate: self)
             cell.tag = 0
             return cell
-            
+        //Allows the user to choose what locations this product can belong in.
         case 1:
             let cell = ExpandingTFCell.init(numOfTextFields: numOfTextFields, locations: manager.getLocationStrings(for: .locations), currentSelections: currentSelections, type: .pickerTextField, delegate: self)
             cell.title.text = "Locations"
             cell.setDelegate(delegate: self)
+            
             return cell
             
         case 2:
