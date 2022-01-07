@@ -49,34 +49,52 @@ class ExpandingTFCell: UITableViewCell {
         return button
     }()
     
+<<<<<<< HEAD:StockSafe/Reusables/ExpandingTFCell.swift
     // Custom initializer
     init(numOfTextFields: Int, locations: [String], currentSelections: [Int:String], type: TextFieldType, delegate: EPTFCDelegate) {
+=======
+    // Custom initializer grabs the num of text fields, locations, current selections, the type , and the delegate.
+    init(numOfTextFields: Int, locations: [String], currentSelections: [Int:String], type: TextFieldCellType, delegate: EPTFCDelegate) {
+>>>>>>> 98a39b024d73d5275059092f511bf575130ef952:StockSafe/Views/ReusableCells/ExpandingTFCell.swift
         self.numOfTextFields = numOfTextFields
         self.locations = locations
         self.currentSelections = currentSelections
         self.delegate = delegate
         self.type = type
+<<<<<<< HEAD:StockSafe/Reusables/ExpandingTFCell.swift
        
+=======
+    //this is the symbol config for the images to be displayed on the 2 buttons assigned below.
+        let symbolConfig = UIImage.SymbolConfiguration(scale: .large)
+        addButton = SFButton(frame: .zero, sfImage: UIImage(systemName: "plus.circle.fill", withConfiguration: symbolConfig)!, color: .systemGreen)
+        deleteButton = SFButton(frame: .zero, sfImage: UIImage(systemName: "minus.circle.fill", withConfiguration: symbolConfig)!, color: .systemRed)
+    // this calls the super class initializer
+>>>>>>> 98a39b024d73d5275059092f511bf575130ef952:StockSafe/Views/ReusableCells/ExpandingTFCell.swift
         super.init(style: .subtitle, reuseIdentifier: ExpandingTFCell.identifier)
     }
-    
+    //catches errors
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //this function is called everytime the class laysout a subview
     override func layoutSubviews() {
         super.layoutSubviews()
         configureCell(type: type)
         addArchiveTF()
         addArrowSymbols()
     }
-    
+    //setting delegate
     public func setDelegate(delegate: EPTFCDelegate) {
         self.delegate = delegate
     }
 
     // Configures PTFs and addButton
+<<<<<<< HEAD:StockSafe/Reusables/ExpandingTFCell.swift
     private func configureCell(type: TextFieldType) {
+=======
+    private func configureCell(type: TextFieldCellType) {
+
+>>>>>>> 98a39b024d73d5275059092f511bf575130ef952:StockSafe/Views/ReusableCells/ExpandingTFCell.swift
         title.frame = CGRect(x: 15,
                              y: 0,
                              width: title.intrinsicContentSize.width,
@@ -139,7 +157,7 @@ class ExpandingTFCell: UITableViewCell {
         }
     }
 
-     
+     //this adds arrow below/between textfields
     private func addArrowSymbols() {
         for index in 0..<numOfTextFields {
             let arrow = UIImageView()
@@ -151,7 +169,7 @@ class ExpandingTFCell: UITableViewCell {
             addSubview(arrow)
         }
     }
-    
+    //lets user know that product is allowed into the archive
     public func addArchiveTF() {
         let atf = UITextField(frame: CGRect(x: Int(contentView.frame.size.width-215),
                                             y: (88*(numOfTextFields))+25,
@@ -169,13 +187,12 @@ class ExpandingTFCell: UITableViewCell {
         currentSelections[sender.tag] = sender.text
         delegate?.updateSelections(selections: currentSelections)
     }
-    
+    // Function to retrieve and store TF selection
     @objc private func getTFSelection(_ sender: UITextField) {
         currentSelections[sender.tag] = sender.text
         delegate?.updateSelections(selections: currentSelections)
     }
-    
-    // Func to pass through delegate to reload cell with an added PTF
+    // Func to pass through delegate to reload cell with an added PTF/TF(whenever +/- is pressed this adds or removes PTF/TF)
     @objc private func addNewTF() {
         numOfTextFields += 1
         delegate?.readyForReload(numOfTextFields: numOfTextFields, currentSelections: currentSelections)
