@@ -49,27 +49,18 @@ class ExpandingTFCell: UITableViewCell {
         return button
     }()
     
-<<<<<<< HEAD:StockSafe/Reusables/ExpandingTFCell.swift
-    // Custom initializer
-    init(numOfTextFields: Int, locations: [String], currentSelections: [Int:String], type: TextFieldType, delegate: EPTFCDelegate) {
-=======
     // Custom initializer grabs the num of text fields, locations, current selections, the type , and the delegate.
     init(numOfTextFields: Int, locations: [String], currentSelections: [Int:String], type: TextFieldCellType, delegate: EPTFCDelegate) {
->>>>>>> 98a39b024d73d5275059092f511bf575130ef952:StockSafe/Views/ReusableCells/ExpandingTFCell.swift
         self.numOfTextFields = numOfTextFields
         self.locations = locations
         self.currentSelections = currentSelections
         self.delegate = delegate
         self.type = type
-<<<<<<< HEAD:StockSafe/Reusables/ExpandingTFCell.swift
-       
-=======
     //this is the symbol config for the images to be displayed on the 2 buttons assigned below.
         let symbolConfig = UIImage.SymbolConfiguration(scale: .large)
         addButton = SFButton(frame: .zero, sfImage: UIImage(systemName: "plus.circle.fill", withConfiguration: symbolConfig)!, color: .systemGreen)
         deleteButton = SFButton(frame: .zero, sfImage: UIImage(systemName: "minus.circle.fill", withConfiguration: symbolConfig)!, color: .systemRed)
     // this calls the super class initializer
->>>>>>> 98a39b024d73d5275059092f511bf575130ef952:StockSafe/Views/ReusableCells/ExpandingTFCell.swift
         super.init(style: .subtitle, reuseIdentifier: ExpandingTFCell.identifier)
     }
     //catches errors
@@ -89,12 +80,8 @@ class ExpandingTFCell: UITableViewCell {
     }
 
     // Configures PTFs and addButton
-<<<<<<< HEAD:StockSafe/Reusables/ExpandingTFCell.swift
-    private func configureCell(type: TextFieldType) {
-=======
     private func configureCell(type: TextFieldCellType) {
 
->>>>>>> 98a39b024d73d5275059092f511bf575130ef952:StockSafe/Views/ReusableCells/ExpandingTFCell.swift
         title.frame = CGRect(x: 15,
                              y: 0,
                              width: title.intrinsicContentSize.width,
