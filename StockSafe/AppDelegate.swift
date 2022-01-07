@@ -16,7 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Configures Firebase for this application
         FirebaseApp.configure()
+        
+        // Loads the currently set ColorTheme (set using UserDefaults)
+        ColorThemes.loadTheme(themeID: ColorThemes.currentThemeID)
+        
+        // Sets the userID in the Constants file for later retrieval. If there is no current userID, this will signal to SceneDelegate to launch with the LoginViewController
+        Constants.userID = Auth.auth().currentUser?.uid ?? ""
         
         return true
     }

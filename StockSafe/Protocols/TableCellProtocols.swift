@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum TextFieldCellType {
-    case textField
-    case pickerTextField
-}
-
 protocol TextFieldCellDelegate: AnyObject {
     func returnText(senderTag: Int, text: String)
 }

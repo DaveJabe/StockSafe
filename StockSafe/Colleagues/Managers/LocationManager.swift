@@ -8,12 +8,12 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 // LocationManager - this class is responsible for managing a User's locations (reading and writing to Firestore)
 class LocationManager: ColleagueProtocol {
     
-    // `db` variable used to interact with Firestore
-    public var db: Firestore!
+    var db: Firestore!
     
     // Mediator protocol for communicating events to the mediator (view controller)
     public weak var mediator: MediatorProtocol?
@@ -43,7 +43,7 @@ class LocationManager: ColleagueProtocol {
     public func configureLocations() {
         locations = []
         db.collection("Locations")
-            .whereField("userID", isEqualTo: userIDkey)
+            .whereField("userID", isEqualTo: Constants.userID)
             .getDocuments() { [self] querySnapshot, error in
                 if error != nil {
                     print("Error in ProductManager - configureLocations(): \(String(describing: error))")
@@ -86,7 +86,7 @@ class LocationManager: ColleagueProtocol {
     // This should be used at account creation and account log in, AFTER configureLocations()
     public func archiveCheck() {
         if !locations.contains(where: { $0.name == "Archive" }) {
-            let _ = try? db.collection("Locations").addDocument(from: ArchiveTemplate()) { error in
+            let _ = try? db.collection("Locations").addDocument(from: ArchiveTemplate(userID: Constants.userID)) { error in
                 if error != nil {
                     print("Error in archiveCheck: \(String(describing: error))")
                 }
@@ -97,7 +97,7 @@ class LocationManager: ColleagueProtocol {
     // Function for User to add new location
     public func addNewLocation(name: String, color: String, completion: () -> Void) {
         do {
-            let _ = try db.collection("Locations").addDocument(from: Location(name: name, products: nil, color: color, userID: userIDkey))
+            let _ = try db.collection("Locations").addDocument(from: Location(name: name, products: nil, color: color, userID: Constants.userID))
         }
         catch {
             print("Error writing new location to 'Locations' in Firestore")
@@ -116,5 +116,20 @@ class LocationManager: ColleagueProtocol {
             }
         }
         return locationStrings
+    }
+    
+    public func checkIfNameAlreadyExists(name: String, field: String, in collection: String) -> Bool {
+        var check = false
+        db.collection(collection).whereField(field, isEqualTo: name).getDocuments() { querySnapshot, error in
+            if error != nil {
+                print("Error in checkIfNameAlreadyExists() - LocationManager : \(String(describing: error))")
+            }
+            else {
+                if !querySnapshot!.isEmpty {
+                    check = true
+                }
+            }
+        }
+        return check
     }
 }

@@ -16,7 +16,7 @@ class ProductManager: LocationManager {
     public func configureProducts() {
         products = []
         db.collection("products")
-            .whereField("userID", isEqualTo: userIDkey)
+            .whereField("userID", isEqualTo: Constants.userID)
             .getDocuments() { [self] querySnapshot, err in
                 if err != nil {
                     print("Error in configureProducts: \(String(describing: err))")
@@ -53,7 +53,7 @@ class ProductManager: LocationManager {
     
     public func addNewProduct(name: String, locations: [Int:String], shelfLife: ShelfLife?, color: String, completion: () -> Void) {
         do {
-            let _ = try db.collection("products").addDocument(from: Product(name: name, cases: nil, locations: locations, shelfLife: shelfLife, color: color, userID: userIDkey))
+            let _ = try db.collection("products").addDocument(from: Product(name: name, cases: nil, locations: locations, shelfLife: shelfLife, color: color, userID: Constants.userID))
             print("New Product successfully written to Firestore!")
         }
         catch {
