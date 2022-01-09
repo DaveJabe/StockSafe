@@ -56,6 +56,14 @@ extension UIViewController {
         }
     }
     
+    func removeChild() {
+        self.children.forEach {
+            $0.willMove(toParent: nil)
+            $0.view.removeFromSuperview()
+            $0.removeFromParent()
+        }
+    }
+    
     // Func to present an alert with a title and message
     func presentSimpleAlert(title: String, message: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -10,13 +10,13 @@ import FirebaseAuth
 
 class MainViewController: UIViewController {
     
-    private var casePage = CasesViewController()
+    private var casePage: CasesViewController?
     
-    private var productPage = ProductsViewController()
+    private var productPage: ProductsViewController?
     
-    private var locationPage = LocationsViewController()
+    private var locationPage: LocationsViewController?
     
-    private var settingsPage = SettingsViewController()
+    private var settingsPage: SettingsViewController?
     
     private let containerView = UIView()
     
@@ -95,14 +95,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        add(casePage, viewForChild: childView)
-        add(productPage, viewForChild: childView)
-        add(locationPage, viewForChild: childView)
-        add(settingsPage, viewForChild: childView)
-        
-        productPage.view.isHidden = true
-        locationPage.view.isHidden = true
-        settingsPage.view.isHidden = true
+        toggleChildVC(child: 0)
         
         dateLabel.getDate()
         timeLabel.getTime()
@@ -204,9 +197,9 @@ class MainViewController: UIViewController {
     }
     
     @objc private func resignViews(_ sender: UITapGestureRecognizer) {
-        casePage.submenu.ptfOne!.resignFirstResponder()
-        casePage.submenu.ptfTwo!.resignFirstResponder()
-        casePage.tuckAwaySelectionViews()
+        casePage!.submenu.ptfOne!.resignFirstResponder()
+        casePage!.submenu.ptfTwo!.resignFirstResponder()
+        casePage!.tuckAwaySelectionViews()
         toggleMenu()
     }
     
@@ -251,45 +244,49 @@ class MainViewController: UIViewController {
     
     // This func will switch the childVC to the cases page
     @objc private func switchToCases(_ sender: UITapGestureRecognizer) {
-        productPage.view.isHidden = true
-        locationPage.view.isHidden = true
-        settingsPage.view.isHidden = true
-        casePage.view.isHidden = false
-        
+        toggleChildVC(child: 0)
         childVCLabel.text = "Cases"
         toggleMenu()
     }
     
     // This func will switch the childVC to the products page
     @objc private func switchToProducts(_ sender: UITapGestureRecognizer) {
-        casePage.view.isHidden = true
-        locationPage.view.isHidden = true
-        settingsPage.view.isHidden = true
-        productPage.view.isHidden = false
-        
+        toggleChildVC(child: 1)
         childVCLabel.text = "Products"
         toggleMenu()
     }
     
     // This func will switch the childVC to the locations page
     @objc private func switchToLocations(_ sender: UITapGestureRecognizer) {
-        productPage.view.isHidden = true
-        casePage.view.isHidden = true
-        settingsPage.view.isHidden = true
-        locationPage.view.isHidden = false
-        
+        toggleChildVC(child: 2)
         childVCLabel.text = "Locations"
         toggleMenu()
     }
     
     @objc private func switchToSettings(_ sender: UITapGestureRecognizer) {
-        productPage.view.isHidden = true
-        casePage.view.isHidden = true
-        locationPage.view.isHidden = true
-        settingsPage.view.isHidden = false
-        
+        toggleChildVC(child: 3)
         childVCLabel.text = "Settings"
         toggleMenu()
+    }
+    
+    private func toggleChildVC(child: Int) {
+        removeChild()
+        switch child {
+        case 0:
+            casePage = CasesViewController()
+            add(casePage!, viewForChild: childView)
+        case 1:
+            productPage = ProductsViewController()
+            add(productPage!, viewForChild: childView)
+        case 2:
+            locationPage = LocationsViewController()
+            add(locationPage!, viewForChild: childView)
+        case 3:
+            settingsPage = SettingsViewController()
+            add(settingsPage!, viewForChild: childView)
+        default:
+            print("Error in toggleChildVC- child: \(child)")
+        }
     }
 }
 
@@ -297,14 +294,7 @@ extension MainViewController: MediatorProtocol {
     func notify(sender: ColleagueProtocol, event: Event) {
         switch event {
         case .newThemeSelection:
-            casePage = CasesViewController()
-            productPage = ProductsViewController()
-            locationPage = LocationsViewController()
-            settingsPage = SettingsViewController()
-
-            viewDidLoad()
-            casePage.view.isHidden = true
-            settingsPage.view.isHidden = false
+            toggleChildVC(child: 3)
             
         default:
             print("Error in func notify() - MainViewController")
