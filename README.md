@@ -1,5 +1,5 @@
 # StockSafe
->The cutting-edge, effortless solution for tracking cases of perishable products. StockSafe's unique approach to product management makes cost-efficacy, guest-safety and employee productivity remarkably simple.
+> An effortless solution for tracking cases of perishable products. StockSafe's unique approach to product management prioritizes cost-efficacy, guest-safety and employee productivity.
 
 ## Development Guidelines
 * The Email/Password combination for logging into StockSafe on test devices/simulators is: dj96202013@gmail.com/Dj1999dj.
@@ -8,3 +8,14 @@
 * Colleagues fall into 2 categories:
   * ViewViewModels (VVMs) - VVMs merge the functionality of Views and ViewModels by not only configuring, but also presenting the View.
   * Managers - Managers query Firestore for information about Locations, Products, and Cases. Managers also manage the majority of logic involved in passing and changing the data it querys.
+
+## Application Previews
+> Account Creation and Signing In
+
+> Adding Cases
+
+> Stocking Cases
+
+> Adding a Product
+
+> Adding a Location
