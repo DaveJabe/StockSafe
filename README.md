@@ -3,11 +3,17 @@
 
 ## Development Guidelines
 * The Email/Password combination for logging into StockSafe on test devices/simulators is: dj96202013@gmail.com/Dj1999dj.
-* The ViewDesigner class is responsible for basic functions to enhance views (shadows, gradients, and StockSafe fonts).
 * StockSafe follows the "Mediator Design Pattern": mediators (UIViewControllers) mediate the communication and functionality between Colleagues (CaseTables, SelectionViews, managers). This is accomplished via the ColleagueProtocol and the MediatorProtocol.
 * Colleagues fall into 2 categories:
   * UI Elements - These classes both configure and present the view.
   * Managers - Managers query Firestore for information about Locations, Products, and Cases. Managers also manage the majority of logic involved in passing and changing the data it querys.
+
+* Data Models
+  1. CaseModel - An identifiable, codable, hashable and comparable struct for "Cases." 
+  2. ProductModel
+  3. LocationModel 
+* The ViewDesigner class is responsible for basic functions to enhance views (shadows, gradients, and StockSafe fonts).
+* 
 
 ## Application Previews
  
@@ -17,7 +23,7 @@
 * This video demonstrates account creation in StockSafe (secure text entries are hidden in screen recording). The Firebase Authentication SDK is used for storing users and facilitating the sign-in process.
 
 ![sign-in](https://user-images.githubusercontent.com/54407429/165985202-10e89706-2632-4356-aee2-6ab40e60a245.gif)
-* The simple username/password sign-in process.
+* The simple email/password sign-in process.
 
 
 ### Adding Cases
