@@ -12,16 +12,31 @@
 ## Application Previews
 > Account Creation and Signing In
 
-![CreateAccount](https://user-images.githubusercontent.com/54407429/165979966-f347bd1d-f5f1-4bc9-abe4-1be0d4e8772f.gif)
+![create_account](https://user-images.githubusercontent.com/54407429/165985156-29064b6e-d699-4657-8450-f10f6cb753e4.gif)
+* This video demonstrates account creation in StockSafe (secure text entries are hidden in screen recording).
 
-This video demonstrates account creation in StockSafe (secure text entries are hidden in screen recording).
-
-Here we can see the sign-in process.
+![sign-in](https://user-images.githubusercontent.com/54407429/165985202-10e89706-2632-4356-aee2-6ab40e60a245.gif)
+* Here we can see the sign-in process.
 
 > Adding Cases
 
+![add_cases](https://user-images.githubusercontent.com/54407429/165985287-b463f40a-29e5-463c-a74f-e4031f5c9992.gif)
+
 > Stocking Cases
 
-> Adding a Product
+![stock_cases](https://user-images.githubusercontent.com/54407429/165985338-f2cda3a2-8d15-42fa-ab81-858c5d03fd7b.gif)
 
-> Adding a Location
+> Undo/Redo Functions
+
+![undo_redo](https://user-images.githubusercontent.com/54407429/165985419-8cc4563e-57e4-43cb-82b6-a0173289d392.gif)
+
+> Archiving and Replaceing Preexisting Cases
+
+![archive-replace](https://user-images.githubusercontent.com/54407429/165985506-1bacaf3d-e3ea-4dca-9a51-11a08356486b.gif)
+
+> Reseting Shelf-Life
+
+![erase-sl](https://user-images.githubusercontent.com/54407429/165985625-152ead4f-9e07-4bca-b7a9-83bc5623a655.gif)
+
+
+
