@@ -11,7 +11,8 @@
 
 ## Application Previews
 > Account Creation and Signing In
-![StockSafe-CreateAccount](https://user-images.githubusercontent.com/54407429/165974858-cc8db6bb-2498-4d7c-8669-11a5cc236fb3.gif)
+![StockSafe-CreateAccount](https://user-images.githubusercontent.com/54407429/165975653-5155e66c-36da-4847-9c75-1ec1b6052547.gif)
+
 
 This video demonstrates account creation in StockSafe (secure text entries are hidden in screen recording).
 
