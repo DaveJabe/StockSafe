@@ -11,6 +11,10 @@
 
 ## Application Previews
 > Account Creation and Signing In
+https://user-images.githubusercontent.com/54407429/165966948-c0efbaab-7d44-4890-a589-7dce5761c645.mov
+This video demonstrates account creation in StockSafe (secure text entries are hidden in screen recording).
+https://user-images.githubusercontent.com/54407429/165966990-e6b3a9ed-44cf-4a49-ab6c-9a3c9a39acf8.mov
+Here we can see the sign-in process.
 
 > Adding Cases
 
