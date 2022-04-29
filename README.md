@@ -8,12 +8,7 @@
   * UI Elements - These classes both configure and present the view.
   * Managers - Managers query Firestore for information about Locations, Products, and Cases. Managers also manage the majority of logic involved in passing and changing the data it querys.
 
-* Data Models
-  1. CaseModel - An identifiable, codable, hashable and comparable struct for "Cases." 
-  2. ProductModel
-  3. LocationModel 
 * The ViewDesigner class is responsible for basic functions to enhance views (shadows, gradients, and StockSafe fonts).
-* 
 
 ## Application Previews
  
@@ -29,7 +24,7 @@
 ### Adding Cases
 
 ![add_cases](https://user-images.githubusercontent.com/54407429/165985287-b463f40a-29e5-463c-a74f-e4031f5c9992.gif)
-* In this video, "Strawberries" are selected as the product to be added and "Prep Table" is selected as the location cases of the selected product will be added to. Note that a shelf life is automatically assigned to each case upon creation, indicated to the user as days until expiry ("Expires in 4 days"). When cases are added, a unique user ID is generated for a  Firebase Firestore document with attributes corresponding to the case information (i.e. product = "Strawberries", caseNumber = 1, etc.).
+* In this video, "Strawberries" are selected as the product to be added and "Prep Table" is selected as the location to which cases of the selected product will be added to. Note that a shelf life is automatically assigned to each case upon creation, indicated to the user as days until expiry ("Expires in 4 days"). When cases are added, a unique user ID is generated for a  Firebase Firestore document with attributes corresponding to the case information (i.e. product = "Strawberries", caseNumber = 1, etc.).
 
 
 ### Stocking Cases
