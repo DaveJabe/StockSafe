@@ -1,12 +1,13 @@
 # StockSafe
 > An alternative solution for tracking cases of perishable products. StockSafe's unique approach to product management prioritizes cost-efficacy, guest-safety and employee productivity. The app idea was validated in a local Chick-Fil-A, replacing the preceding pen-paper log system during its trial. 
+
 > Features: 
-* User account creation/sign in
-* Add custom products and locations 
-* Add and stock cases of products to different locations
-* Track shelf lives of cases 
-* Bold and effortless UI 
-* Notifies users when cases of product expires
+> * User account creation/sign in
+> * Add custom products and locations 
+> * Add and stock cases of products to different locations
+> * Track shelf lives of cases 
+> * Bold and effortless UI 
+> * Notifies users when cases of product expires
 
 ## Development Guidelines
 * The Email/Password combination for logging into StockSafe on test devices/simulators is: dj96202013@gmail.com/Dj1999dj.
