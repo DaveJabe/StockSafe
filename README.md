@@ -47,7 +47,7 @@
 * A simple demonstration of the undo and redo functions; the action undone (and then redone) is the addition of a case of "Romaine Lettuce."
 
 
-### Archiving and Replaceing Preexisting Cases
+### Archiving and Replacing Preexisting Cases
 
 ![archive-replace](https://user-images.githubusercontent.com/54407429/165985506-1bacaf3d-e3ea-4dca-9a51-11a08356486b.gif)
 * StockSafe offers the option to archive and replace cases when the user attempts to add cases with preexisting numbers. In this case, we see cases 1, 2 and 3 replaced and given new shelf lives.
